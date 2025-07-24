@@ -1,0 +1,87 @@
+{
+  "auth": {
+    "patientdashboarde54b65db": {
+      "customAuth": false,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "patientdashboarde54b65dbCustomMessage",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "patientdashboarde54b65dbCustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_patientdashboarde54b65dbCustomMessage_EMAILMESSAGE": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "patientdashboarde54b65dbCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_patientdashboarde54b65dbCustomMessage_EMAILSUBJECT": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "patientdashboarde54b65dbCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_patientdashboarde54b65dbCustomMessage_REDIRECTURL": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "patientdashboarde54b65dbCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_patientdashboarde54b65dbCustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "patientdashboarde54b65dbCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_patientdashboarde54b65dbCustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "patientdashboarde54b65dbCustomMessage"
+        }
+      ]
+    }
+  }
+}

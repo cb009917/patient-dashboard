@@ -1,0 +1,30 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-patientdashboard-dev-62c47-authRole",
+      "UnauthRoleArn": "arn:aws:iam::545009862179:role/amplify-patientdashboard-dev-62c47-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::545009862179:role/amplify-patientdashboard-dev-62c47-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-patientdashboard-dev-62c47-deployment",
+      "UnauthRoleName": "amplify-patientdashboard-dev-62c47-unauthRole",
+      "StackName": "amplify-patientdashboard-dev-62c47",
+      "StackId": "arn:aws:cloudformation:us-east-1:545009862179:stack/amplify-patientdashboard-dev-62c47/e7b599e0-68ab-11f0-9384-0afffb3ee03d",
+      "AmplifyAppId": "dk5rboezb8ah9",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-patientdashboard-dev-62c47-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "patientdashboarde54b65db": {}
+      },
+      "function": {
+        "patientdashboarde54b65dbCustomMessage": {
+          "REDIRECTURL": "",
+          "EMAILSUBJECT": "",
+          "EMAILMESSAGE": "",
+          "deploymentBucketName": "amplify-patientdashboard-dev-62c47-deployment",
+          "s3Key": "amplify-builds/patientdashboarde54b65dbCustomMessage-55325866715831742b73-build.zip"
+        }
+      }
+    }
+  }
+}
