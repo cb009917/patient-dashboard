@@ -1,10 +1,12 @@
+// Dashboard.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_URL = 'https://3l0dyz6m34.execute-api.us-east-1.amazonaws.com/prod/telemetry'; // Replace with your GET API URL
 
-function App() {
+const API_URL = 'https://3l0dyz6m34.execute-api.us-east-1.amazonaws.com/prod/telemetry';
+
+function Dashboard({ user, signOut }) {
   const [telemetry, setTelemetry] = useState([]);
   const [alerts, setAlerts] = useState([]);
 
@@ -12,10 +14,7 @@ function App() {
     axios.get(API_URL)
       .then(res => {
         const data = res.data;
-
         setTelemetry(data);
-
-        // Filter for alerts (CRITICAL or INACTIVE)
         const filtered = data.filter(d => d.status !== 'OK');
         setAlerts(filtered);
       })
@@ -30,6 +29,8 @@ function App() {
 
   return (
     <div className="App">
+     
+
       <h1>📈 Patient Monitoring Dashboard</h1>
 
       <div className="summary-cards">
@@ -96,4 +97,4 @@ function App() {
   );
 }
 
-export default App;
+export default Dashboard;
