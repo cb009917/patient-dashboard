@@ -1,7 +1,8 @@
 // PatientHistory.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './App.css';
+import './PatientHistory.css';
+
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -17,7 +18,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip,
 
 const API_URL = 'https://3l0dyz6m34.execute-api.us-east-1.amazonaws.com/prod/telemetry';
 
-function PatientHistory({ signOut }) {
+function PatientHistory({ user, signOut }) {
   const [data, setData] = useState([]);
   const [patientId, setPatientId] = useState('');
   const [filtered, setFiltered] = useState([]);
@@ -53,9 +54,10 @@ function PatientHistory({ signOut }) {
     datasets: [{
       label: 'Heart Rate',
       data: filtered.map(d => d.heart_rate),
-      borderColor: '#e63946',
-      backgroundColor: 'rgba(230, 57, 70, 0.2)',
-      tension: 0.3
+      borderColor: '#ff4d6d',
+      backgroundColor: 'rgba(255, 77, 109, 0.1)',
+      tension: 0.4,
+      pointRadius: 2,
     }]
   };
 
@@ -64,44 +66,59 @@ function PatientHistory({ signOut }) {
     datasets: [{
       label: 'SpO2',
       data: filtered.map(d => d.oxygen_saturation),
-      borderColor: '#1d3557',
-      backgroundColor: 'rgba(29, 53, 87, 0.2)',
-      tension: 0.3
+      borderColor: '#00b4d8',
+      backgroundColor: 'rgba(0, 180, 216, 0.1)',
+      tension: 0.4,
+      pointRadius: 2,
     }]
   };
 
   return (
     <div className="App">
-      <div className="header">
-        <h1>📊 Patient History</h1>
-        <button className="signout-btn" onClick={signOut}>Sign Out</button>
+     
+
+      <div className="history-container">
+        <h1 className="page-title">📊 Patient Analytics</h1>
+
+        <div className="selector">
+          <label>Select Patient:</label>
+          <select value={patientId} onChange={e => setPatientId(e.target.value)}>
+            <option value="">-- Choose --</option>
+            {uniquePatientIds.map(id => (
+              <option key={id} value={id}>{id}</option>
+            ))}
+          </select>
+        </div>
+
+        {patientId && (
+          <>
+            <div className="stat-cards">
+              <div className="stat-card">
+                <h4>Avg HR</h4>
+                <p>{avgHR} bpm</p>
+              </div>
+              <div className="stat-card">
+                <h4>Avg SpO2</h4>
+                <p>{avgSpO2} %</p>
+              </div>
+              <div className="stat-card">
+                <h4>Last Alert</h4>
+                <p>{latestAlert?.timestamp || '—'}</p>
+              </div>
+            </div>
+
+            <div className="chart-section">
+              <h3>📈 Heart Rate Trend</h3>
+              <Line data={hrChart} />
+            </div>
+
+            <div className="chart-section">
+              <h3>💙 SpO2 Trend</h3>
+              <Line data={spo2Chart} />
+            </div>
+          </>
+        )}
       </div>
-
-      <div className="filters" style={{ margin: '1rem 0' }}>
-        <label>Select Patient: </label>
-        <select value={patientId} onChange={e => setPatientId(e.target.value)}>
-          <option value="">-- Choose --</option>
-          {uniquePatientIds.map(id => (
-            <option key={id} value={id}>{id}</option>
-          ))}
-        </select>
-      </div>
-
-      {patientId && (
-        <>
-          <div className="card-row">
-            <div className="card"><strong>Avg HR:</strong> {avgHR} bpm</div>
-            <div className="card"><strong>Avg SpO2:</strong> {avgSpO2} %</div>
-            <div className="card"><strong>Last Alert:</strong> {latestAlert?.timestamp || '—'}</div>
-          </div>
-
-          <h3>📈 Heart Rate Trend</h3>
-          <Line data={hrChart} />
-
-          <h3>💙 SpO2 Trend</h3>
-          <Line data={spo2Chart} />
-        </>
-      )}
     </div>
   );
 }
